@@ -1,0 +1,8 @@
+{
+    "VerboseLogging": [ "SMAPI", "JunimoHost.Server" ],
+    "CheckForUpdates": false,
+    "ListenForConsoleInput": true,
+    "DeveloperMode": true,
+    "ParanoidWarnings": false,
+    "LogTechnicalDetailsForBrokenMods": true
+}

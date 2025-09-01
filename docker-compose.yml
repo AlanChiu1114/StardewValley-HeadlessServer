@@ -1,0 +1,18 @@
+services:
+  stardew-server:
+    container_name: stardew
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        STEAM_USERNAME: ${STEAM_USERNAME}
+        STEAM_PASSWORD: ${STEAM_PASSWORD}
+    image: stardew-server
+    ports:
+      - "24642:24642/tcp"
+      - "24642:24642/udp"
+    volumes:
+      - ./data:/data
+    working_dir: /game
+    restart: unless-stopped

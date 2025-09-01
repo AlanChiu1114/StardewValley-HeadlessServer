@@ -1,0 +1,11 @@
+{
+  "Port": 24642,
+  "AutoStartServer": true,
+  "PauseWhenEmpty": false,
+  "CloseWhenAllPlayersLeave": false,
+  "Password": "",
+  "MaxPlayers": 4,
+  "LogLevel": "Info",
+  "BindAddress": "0.0.0.0",
+  "AllowCommands": true
+}

@@ -1,0 +1,20 @@
+services:
+    stardew:
+        image: sdvd/server:latest
+        container_name: sdvd-server
+        ports:
+            - ${GAME_PORT}:24642/udp
+            - ${VNC_PORT}:5800
+        volumes:
+            - game:/data/Stardew
+            - data:/config/xdg/config/StardewValley
+        environment:
+            STEAM_USER: "${STEAM_USER}"
+            STEAM_PASS: "${STEAM_PASS}"
+            STEAM_GUARD_CODE: "${STEAM_GUARD_CODE}"
+            VNC_PASSWORD: "${VNC_PASSWORD}"
+            DISABLE_RENDERING: "${DISABLE_RENDERING}"
+
+volumes:
+  game:
+  data:

@@ -1,0 +1,47 @@
+# Misc
+.DS_Store
+.fleet
+
+# VS
+.vs
+
+# VSC
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.history/
+
+# IntelliJ
+.idea
+
+# Resharper personal layer
+JunimoMods.sln.DotSettings
+
+# Logs
+logs
+*.log
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# Build output
+/.output
+/build
+/bin
+/debug
+/decompiled
+
+# Decompiler version file
+/version.txt
+
+# Used by fetch-sdv-version.sh
+/tools/depot-downloader/DepotDownloader.exe
+/tools/depot-downloader/DepotDownloader.xml
+
+# Extra mods
+/mods

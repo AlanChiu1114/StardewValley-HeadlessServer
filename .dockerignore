@@ -1,0 +1,16 @@
+game/
+**/*.sln
+**/bin/
+**/obj/
+**/.git/
+**/.vs/
+**/*.pdb
+**/*.user
+README.md
+README-run.md
+build.md
+**/*.ps1
+**/*.bat
+mods/SMAPIDedicatedServerMod-main/DedicatedServer/*
+.env
+.env.example
