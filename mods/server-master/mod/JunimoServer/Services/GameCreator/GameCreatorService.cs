@@ -40,7 +40,7 @@ namespace JunimoServer.Services.GameCreator
                 UseSeparateWallets = false,
                 StartingCabins = 1,
                 CatPerson = false,
-                FarmName = "Test",
+                FarmName = "星露谷",
                 MaxPlayers = 10,
                 CabinStrategy = 0,
             };
