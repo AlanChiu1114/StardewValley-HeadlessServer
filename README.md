@@ -1,6 +1,7 @@
 # 星露谷物語「無頭」伺服器（Docker 一鍵架設）
 
 以 Docker 一鍵架設星露谷物語多人伺服器，不用開啟遊戲視窗也能持續運作。已內建 SMAPI 4.3.2 與 JunimoServer 模組，支援「無玩家時自動暫停時間」、「新玩家加入自動拓展小屋」等伺服器最佳化。
+- 基礎建置圖文教學：https://forum.gamer.com.tw/C.php?bsn=20774&snA=2624&tnum=1
 
 ## 這是什麼？
 - 以 Linux 容器執行 Stardew Valley（含 SMAPI 與 JunimoServer 模組）。
