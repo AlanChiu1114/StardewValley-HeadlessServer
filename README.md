@@ -30,7 +30,7 @@
 接著依照下方「準備環境」與「快速開始」繼續。
 
 ## 準備環境
-1) 安裝 Docker Desktop（Windows，需使用 Linux 容器模式）。
+1) 安裝 Docker Desktop https://www.docker.com/get-started/（Windows，需使用 Linux 容器模式）。
 2) 建立環境變數檔 `.env`（放在專案根目錄）：
    - 請先將 `.env.example` 複製為 `.env`，並填入：
      - `STEAM_USERNAME=你的Steam帳號`
