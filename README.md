@@ -1,6 +1,6 @@
 # 星露谷物語「無頭」伺服器（Docker 一鍵架設）
 
-以 Docker 一鍵架設星露谷物語多人伺服器，不用開啟遊戲視窗也能持續運作。已內建 SMAPI 4.3.2 與 JunimoServer 模組，支援「無玩家時自動暫停時間」等伺服器最佳化。
+以 Docker 一鍵架設星露谷物語多人伺服器，不用開啟遊戲視窗也能持續運作。已內建 SMAPI 4.3.2 與 JunimoServer 模組，支援「無玩家時自動暫停時間」、「新玩家加入自動拓展小屋」等伺服器最佳化。
 
 ## 這是什麼？
 - 以 Linux 容器執行 Stardew Valley（含 SMAPI 與 JunimoServer 模組）。
@@ -10,16 +10,16 @@
 
 主要依賴的模組/工具：
 - SMAPI 4.3.2
-- JunimoServer（提供自動化、無玩家暫停、伺服器管理等能力）
+- JunimoServer（提供自動化、無玩家暫停、伺服器管理、小屋自動拓展等功能）
 
 ## 版本相容性
-- 遊戲本體：Stardew Valley 1.6.9正式版。
+- 遊戲本體：Stardew Valley 1.6.9正式版(環境建置時透過steamcmd下載)。
 - SMAPI：4.3.2（已內建於映像）。
 - 模組：JunimoServer 1.0.2-alpha（已內建，建置時從專案原始碼編譯）。
 
 注意：
 - 若日後遊戲更新造成不相容，請更新本專案（或等待作者更新）後重新建置；或暫時不要重建，以保留既有可用版本。
-- 本專案以 Linux 版遊戲檔運作；不支援直接使用 Windows/macOS 版遊戲檔。
+- 本專案以 Linux 版遊戲檔運作；不支援直接使用 Windows/macOS 版遊戲檔(環境建置時會自動下載)。
 
 ## 取得專案原始碼
 下載 ZIP（最簡單）
@@ -121,5 +121,6 @@ docker compose up -d
 
 ## 疑難排解
 - 建置卡住等待 Steam 驗證：請到手機 Steam App 同意登入，系統會自動重試並繼續。
+- 環境建置遇到問題請使用 `docker compose down -v --rmi local --remove-orphans; docker compose up -d --build` 嘗試重建。
 - 帳密錯誤：請確認 `.env` 的 `STEAM_USERNAME`/`STEAM_PASSWORD` 正確，修正後重新 `docker compose build`。
 - 連線不到伺服器：確認容器正在執行、連線埠 24642 已打開、防火牆規則允許，並使用正確 IP。
