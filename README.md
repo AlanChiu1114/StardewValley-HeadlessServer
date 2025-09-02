@@ -109,8 +109,9 @@ C:\Users\USERNAME\AppData\Roaming\StardewValley\Saves
 （請將 `USERNAME` 換成你自己的 Windows 使用者名稱）
 
 ## 連線埠
-- 對外開放：`24642/tcp` 與 `24642/udp`(若要開啟對外連線須設定Port Forwarding)
+- 對外開放：`24642/tcp` 與 `24642/udp`(若要開啟對外連線須設定Port Forwarding或直接使用VPN)
 - 本機連線：`127.0.0.1:24642`
+- 區網他機連線：192.168...(使用cmd輸入ipconfig查看ipv4)
 
 ## 更新遊戲/模組
 此映像在執行期不包含 steamcmd，自動更新未啟用；需要更新時，請在專案根目錄重新建置並重啟：
