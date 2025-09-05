@@ -30,6 +30,8 @@ namespace JunimoServer.Services.AlwaysOn
 
         private bool doWarpRoutineToGetToNextDay = false;
         private int _warpTickCounter = 0;
+    // Track how many proactive click attempts were made this night
+    private int _shippingMenuClickAttempts = 0;
 
         // Shipping menu timeout reset, causes menu to be closed when bigger than `Config.EndOfDayTimeOut`
         private int shippingMenuTimeoutTicks;
@@ -137,6 +139,7 @@ namespace JunimoServer.Services.AlwaysOn
             HandlePetChoice();
             HandleCaveChoice();
             HandleCommunityCenterUnlock();
+            HandleShippingMenu();
         }
 
         private void OnUpdateTicked(object sender, UpdateTickedEventArgs e)
@@ -194,15 +197,10 @@ namespace JunimoServer.Services.AlwaysOn
             {
                 return;
             }
-
-            // Starts a timeout in OnUnvalidatedUpdateTick
-            _isShippingMenuActive = true;
-
-            if (Game1.activeClickableMenu is ShippingMenu)
-            {
-                Monitor.Log("Clicking OK on ShippingMenu");
-                Helper.Reflection.GetMethod(Game1.activeClickableMenu, "okClicked").Invoke();
-            }
+            // NOTE: Original logic tried to click ShippingMenu OK here, but Saving only fires AFTER the menu closes.
+            // We now handle it proactively in HandleShippingMenu(). We still consider end-of-day phase active
+            // so timeout logic (offline protection) can continue until 610.
+            _isShippingMenuActive = true; // keep for timeout consistency
         }
 
         private void OnUnvalidatedUpdateTick(object sender, UnvalidatedUpdateTickedEventArgs e)
@@ -473,6 +471,39 @@ namespace JunimoServer.Services.AlwaysOn
                 Helper.Reflection.GetMethod(farmHouse, "startSleep").Invoke();
 
                 doWarpRoutineToGetToNextDay = true;
+            }
+        }
+
+        /// <summary>
+        /// Proactively detect & dismiss the ShippingMenu (end-of-day profit screen) by invoking okClicked.
+        /// Saving event happens only AFTER the menu closes, so relying on OnSaving is too late.
+        /// </summary>
+        private void HandleShippingMenu()
+        {
+            if (!IsAutomating)
+            {
+                return;
+            }
+
+            if (Game1.activeClickableMenu is ShippingMenu)
+            {
+                // Mark phase active for timeout supervision
+                if (!_isShippingMenuActive && Game1.timeOfDay >= 2600) // shipping typically shows after 2600 internal clock
+                {
+                    _isShippingMenuActive = true;
+                    _shippingMenuClickAttempts = 0;
+                }
+
+                _shippingMenuClickAttempts++;
+                Monitor.Log($"[Automation] ShippingMenu detected – attempt #{_shippingMenuClickAttempts} clicking OK");
+                try
+                {
+                    Helper.Reflection.GetMethod(Game1.activeClickableMenu, "okClicked").Invoke();
+                }
+                catch (System.Exception ex)
+                {
+                    Monitor.Log($"[Automation] ShippingMenu okClicked failed: {ex.Message}", LogLevel.Warn);
+                }
             }
         }
 
